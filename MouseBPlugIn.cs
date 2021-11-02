@@ -13,7 +13,6 @@ namespace MouseB
     /// "Show All Files" to see it in the "Solution Explorer" window).</para>
     ///</summary>
     public class MouseBPlugIn : PlugIn
-
     {
         readonly MouseHook.MouseHook mHook = new MouseHook.MouseHook();
 
@@ -28,6 +27,12 @@ namespace MouseB
             get; private set;
         }
 
+        public void Toggle()
+        {
+            mHook.Toggle();
+            Rhino.RhinoApp.WriteLine("MouseB Toggled");
+        }
+
         public override PlugInLoadTime LoadTime => PlugInLoadTime.AtStartup;
 
         /// <summary>
@@ -40,8 +45,7 @@ namespace MouseB
                 //Rhino.RhinoApp.WriteLine("{0}",(e.MouseData & (1 << 16)) != 0 ? "Mouse4" : "Mouse5");
             mHook.MouseAction += new EventHandler<MouseHook.RawMouseEventArgs>(EventB);
             mHook.Start();
-
-            Rhino.RhinoApp.WriteLine("MouseB");
+            //Rhino.RhinoApp.WriteLine("MouseB");
             return LoadReturnCode.Success;
         }
         protected override void OnShutdown()

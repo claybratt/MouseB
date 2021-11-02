@@ -27,7 +27,7 @@ namespace MouseB
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
-            RhinoApp.WriteLine("MouseB");
+            MouseBPlugIn.Instance.Toggle();
             return Result.Success;
         }
     }

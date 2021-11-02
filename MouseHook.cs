@@ -80,6 +80,19 @@ namespace MouseHook
             UnhookWindowsHookEx(_hookId);
         }
 
+        internal void Toggle()
+        {
+            if (_hookId == IntPtr.Zero)
+            {
+                _hookId = SetHook(Proc);
+            }
+            else
+            {
+                UnhookWindowsHookEx(_hookId);
+                _hookId = IntPtr.Zero;
+            }
+        }
+
         private static IntPtr SetHook(LowLevelMouseProc proc)
         {
             var hook = SetWindowsHookEx(WH_MOUSE_LL, proc, GetModuleHandle(null), 0);
